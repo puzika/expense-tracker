@@ -3,6 +3,7 @@ import { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Login from "./screens/login.screen";
 import Register from "./screens/register.screen";
+import Home from "./screens/home.screen";
 
 const styles = StyleSheet.create({
   container: {
@@ -21,6 +22,9 @@ export default function App() {
       break;
     case 'register':
       ScreenView = <Register navigate={setScreen} />;
+      break;
+    case 'home':
+      ScreenView = <Home navigate={setScreen} />;
       break;
     default:
       ScreenView = <Text>No such screen found</Text>

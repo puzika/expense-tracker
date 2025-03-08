@@ -54,7 +54,7 @@ export default function Login({ navigate }: LoginProps) {
             />
          </View>
          <View style={{rowGap: 20}}>
-            <Button title='Log in' />
+            <Button pressHandler={() => navigate('home')} title='Log in' />
             <Text style={styles.alternative}>First time here? <Link title="Register" link={'register'} navigate={navigate} /></Text>
          </View>
       </View>

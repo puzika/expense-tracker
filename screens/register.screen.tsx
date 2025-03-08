@@ -66,7 +66,7 @@ export default function Register({ navigate }: RegisterProps) {
             />
          </View>
          <View style={{rowGap: 20}}>
-            <Button title='Register' />
+            <Button pressHandler={() => navigate('home')} title='Register' />
             <Text style={styles.alternative}>Already have an account? <Link title="Log in" link={'login'} navigate={navigate} /></Text>
          </View>
       </View>

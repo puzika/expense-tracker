@@ -2,7 +2,7 @@ import { TouchableOpacity, Text, StyleSheet } from "react-native";
 
 type ButtonProps = {
    title: string,
-   pressHandler?: () => void,
+   pressHandler: () => void,
 }
 
 const styles = StyleSheet.create({
