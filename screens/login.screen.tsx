@@ -1,7 +1,13 @@
 import { useState } from "react"
 import { Text, View, StyleSheet } from "react-native"
+import { Dispatch, SetStateAction } from "react"
 import Input from "../components/input.component"
 import Button from "../components/button.component"
+import Link from "../components/link.component"
+
+type LoginProps = {
+   navigate: Dispatch<SetStateAction<string>>
+}
 
 const styles = StyleSheet.create({
    container: {
@@ -26,14 +32,9 @@ const styles = StyleSheet.create({
       fontSize: 16,
       textAlign: 'center',
    },
-
-   link: {
-      color: '#10CFAE',
-      textDecorationLine: 'underline',
-   }
 })
 
-export default function Login() {
+export default function Login({ navigate }: LoginProps) {
    const [email, setEmail] = useState<string>('');
    const [password, setPassword] = useState<string>('');
 
@@ -54,7 +55,7 @@ export default function Login() {
          </View>
          <View style={{rowGap: 20}}>
             <Button title='Log in' />
-            <Text style={styles.alternative}>First time here? <Text style={styles.link}>Register</Text></Text>
+            <Text style={styles.alternative}>First time here? <Link title="Register" link={'register'} navigate={navigate} /></Text>
          </View>
       </View>
    )

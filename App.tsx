@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import Login from "./screens/login.screen";
 import Register from "./screens/register.screen";
 
@@ -13,14 +13,14 @@ const styles = StyleSheet.create({
 
 export default function App() {
   const [screen, setScreen] = useState('login');
-  let ScreenView = <Login />;
+  let ScreenView = <Login navigate={setScreen} />;
 
   switch (screen) {
     case 'login':
-      ScreenView = <Login />;
+      ScreenView = <Login navigate={setScreen} />;
       break;
     case 'register':
-      ScreenView = <Register />;
+      ScreenView = <Register navigate={setScreen} />;
       break;
     default:
       ScreenView = <Text>No such screen found</Text>
