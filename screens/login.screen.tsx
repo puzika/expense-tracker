@@ -1,13 +1,9 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { Text, View, StyleSheet } from "react-native"
-import { Dispatch, SetStateAction } from "react"
+import { NavigationContext } from "../contexts/navigation.context"
 import Input from "../components/input.component"
 import Button from "../components/button.component"
 import Link from "../components/link.component"
-
-type LoginProps = {
-   navigate: Dispatch<SetStateAction<string>>
-}
 
 const styles = StyleSheet.create({
    container: {
@@ -34,7 +30,8 @@ const styles = StyleSheet.create({
    },
 })
 
-export default function Login({ navigate }: LoginProps) {
+export default function Login() {
+   const { setScreen } = useContext(NavigationContext);
    const [email, setEmail] = useState<string>('');
    const [password, setPassword] = useState<string>('');
 
@@ -54,8 +51,8 @@ export default function Login({ navigate }: LoginProps) {
             />
          </View>
          <View style={{rowGap: 20}}>
-            <Button pressHandler={() => navigate('home')} title='Log in' />
-            <Text style={styles.alternative}>First time here? <Link title="Register" link={'register'} navigate={navigate} /></Text>
+            <Button pressHandler={() => setScreen('home')} title='Log in' />
+            <Text style={styles.alternative}>First time here? <Link title="Register" link={'register'}/></Text>
          </View>
       </View>
    )

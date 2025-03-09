@@ -1,6 +1,6 @@
-import { Dispatch, SetStateAction } from "react";
-import { View, Text, FlatList, StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native";
+import { useContext } from "react";
+import { View, Text, StyleSheet } from "react-native";
+import { NavigationContext, Screens } from "../contexts/navigation.context";
 
 const styles = StyleSheet.create({
    nav: {
@@ -20,12 +20,9 @@ const styles = StyleSheet.create({
    }
 })
 
-type NavigationProps = {
-   navigate: Dispatch<SetStateAction<string>>
-}
-
-export default function Navigation({ navigate }: NavigationProps) {
-   const links = [
+export default function NavigationBar() {
+   const { setScreen } = useContext(NavigationContext);
+   const links: { link: Screens, title: string }[] = [
       { link: 'home', title: 'Home' },
       { link: 'transactions', title: 'Transactions' },
       { link: 'add', title: 'Add' },
@@ -38,7 +35,7 @@ export default function Navigation({ navigate }: NavigationProps) {
       <View style={styles.nav}>
          {
             links.map(({ link, title}) => (
-               <Text key={link} style={styles.link} onPress={() => navigate(link)}>{title}</Text>
+               <Text key={link} style={styles.link} onPress={() => setScreen(link)}>{title}</Text>
             ))
          }
       </View>

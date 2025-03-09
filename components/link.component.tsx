@@ -1,10 +1,10 @@
-import { Dispatch, SetStateAction } from "react";
+import { useContext } from "react";
+import { NavigationContext, Screens } from "../contexts/navigation.context";
 import { Text, StyleSheet } from "react-native";
 
 type LinkProps = {
    title: string,
-   navigate: Dispatch<SetStateAction<string>>,
-   link: string,
+   link: Screens,
 }
 
 const styles = StyleSheet.create({
@@ -14,9 +14,10 @@ const styles = StyleSheet.create({
    }
 })
 
-export default function Link({ title, link, navigate }: LinkProps) {
+export default function Link({ title, link }: LinkProps) {
+   const { setScreen } = useContext(NavigationContext)
    return (
-      <Text style={styles.link} onPress={() => navigate(link)}>{title}</Text>
+      <Text style={styles.link} onPress={() => setScreen(link)}>{title}</Text>
    )
 }
 

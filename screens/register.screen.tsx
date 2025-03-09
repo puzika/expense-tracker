@@ -1,13 +1,9 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { Text, View, StyleSheet } from "react-native"
-import { Dispatch, SetStateAction } from "react"
+import { NavigationContext } from "../contexts/navigation.context"
 import Input from "../components/input.component"
 import Button from "../components/button.component"
 import Link from "../components/link.component"
-
-type RegisterProps = {
-   navigate: Dispatch<SetStateAction<string>>
-}
 
 const styles = StyleSheet.create({
    container: {
@@ -34,7 +30,9 @@ const styles = StyleSheet.create({
    },
 })
 
-export default function Register({ navigate }: RegisterProps) {
+export default function Register() {
+   const { setScreen } = useContext(NavigationContext);
+
    const [name, setName] = useState<string>('');
    const [email, setEmail] = useState<string>('');
    const [password, setPassword] = useState<string>('');
@@ -66,8 +64,8 @@ export default function Register({ navigate }: RegisterProps) {
             />
          </View>
          <View style={{rowGap: 20}}>
-            <Button pressHandler={() => navigate('home')} title='Register' />
-            <Text style={styles.alternative}>Already have an account? <Link title="Log in" link={'login'} navigate={navigate} /></Text>
+            <Button pressHandler={() => setScreen('home')} title='Register' />
+            <Text style={styles.alternative}>Already have an account? <Link title="Log in" link={'login'} /></Text>
          </View>
       </View>
    )

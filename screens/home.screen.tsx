@@ -1,10 +1,7 @@
-import { Dispatch, SetStateAction } from "react";
+import { useContext } from "react";
 import { View, ScrollView, Text, StyleSheet } from "react-native";
-import Navigation from "../components/navigation.component";
-
-type HomeProps = {
-   navigate: Dispatch<SetStateAction<string>>
-}
+import { TransactionContext } from "../contexts/transactions.context";
+import NavigationBar from "../components/navigation.component";
 
 const styles = StyleSheet.create({
    screen: {
@@ -12,13 +9,13 @@ const styles = StyleSheet.create({
    },
 
    container: {
-      flex: 1
+      flex: 1,
+      padding: 20,
    },
 
    header: {
       flexDirection: 'row',
       justifyContent: 'space-between',
-      padding: 20
    },
 
    headerText: {
@@ -40,8 +37,7 @@ const styles = StyleSheet.create({
 
    transactions: {
       marginTop: 50,
-      paddingHorizontal: 20,
-      gap: 10
+      gap: 15,
    },
 
    transaction: {
@@ -67,14 +63,8 @@ const styles = StyleSheet.create({
    }
 })
 
-export default function Home({ navigate }: HomeProps) {
-   const lastTransactions: { value: number, type: 'income' | 'expense', category: string }[] = [
-      { value: 2500, type: 'income', category: 'Rent' },
-      { value: 500, type: 'expense', category: 'Food' },
-      { value: 1780, type: 'expense', category: 'Plumbing' },
-      { value: 1000, type: 'expense', category: 'Groceries' },
-      { value: 2500, type: 'income', category: 'Rent' },
-   ]
+export default function Home() {
+   const { transactions } = useContext(TransactionContext);
 
    return (
       <View style={styles.screen}>
@@ -87,7 +77,7 @@ export default function Home({ navigate }: HomeProps) {
             <Text style={styles.balanceSubscript}>Balance</Text>
             <View style={styles.transactions}>
                {
-                  lastTransactions.map(({ value, type, category}) => (
+                  transactions.map(({ value, type, category}) => (
                      <View 
                         key={Math.random().toString(36).slice(2)}
                         style={{...styles.transaction, borderColor: type === 'income' ? '#10CFAE' : '#FF7B7B' }}
@@ -100,7 +90,7 @@ export default function Home({ navigate }: HomeProps) {
                }
             </View>
          </ScrollView>
-         <Navigation navigate={navigate} />
+         <NavigationBar />
       </View>
    )
 }
