@@ -6,6 +6,7 @@ import Login from "../screens/login.screen";
 import Register from "../screens/register.screen";
 import Home from "../screens/home.screen";
 import Transactions from "../screens/transactions.component";
+import Add from "../screens/add.screen";
 
 export type Screens = 
    | 'login'
@@ -45,6 +46,9 @@ export default function Navigation() {
          break;
       case 'transactions':
          ScreenView = <Transactions />;
+         break;
+      case 'add':
+         ScreenView = <Add />;
          break;
       default:
          ScreenView = <Text>No such screen found</Text>
