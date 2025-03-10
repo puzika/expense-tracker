@@ -30,7 +30,6 @@ export default function TransactionProvider({ children }: TransactionProviderPro
       { value: 1780, type: 'expense', category: 'Plumbing', description: 'Replaced sink', date: new Date('2025-03-01')},
       { value: 1000, type: 'expense', category: 'Groceries', description: 'BBQ Shopping', date: new Date('2025-03-07') },
       { value: 2500, type: 'income', category: 'Salary', description: '1st week salary', date: new Date('2025-03-01') },
-      { value: 2500, type: 'income', category: 'Rent', description: 'Eric paid rent', date: new Date('2025-03-09') },
    ]
 
    const [transactions, setTransactions] = useState<Transaction[]>(lastTransactions);

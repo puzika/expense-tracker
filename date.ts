@@ -34,7 +34,6 @@ const isThisYear = (date: Date): boolean => {
 }
 
 export default function isInPeriod(period: string, date: Date): boolean {
-   console.log(period)
    switch (period) {
       case 'Today':
          return isToday(date);

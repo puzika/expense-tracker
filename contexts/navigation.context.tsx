@@ -1,12 +1,14 @@
-import { useState } from "react";
-import { Dispatch, SetStateAction, createContext, ReactNode } from "react";
+import { useState, Dispatch, SetStateAction, createContext, ReactNode } from "react";
 import { View, Text } from "react-native";
 import TransactionProvider from "./transactions.context";
+import GoalsProvider from "./goals.context";
 import Login from "../screens/login.screen";
 import Register from "../screens/register.screen";
 import Home from "../screens/home.screen";
 import Transactions from "../screens/transactions.component";
 import Add from "../screens/add.screen";
+import Goals from "../screens/goals.screen";
+import Statistics from "../screens/statistics.screen";
 
 export type Screens = 
    | 'login'
@@ -20,18 +22,25 @@ export type Screens =
 type NavigationContextType = {
    screen: Screens,
    setScreen: Dispatch<SetStateAction<Screens>>,
+   prevScreens: Screens[],
+   setPrevScreens: Dispatch<SetStateAction<Screens[]>>
 }
 
 const initialState: NavigationContextType = {
    screen: 'login',
+   prevScreens: ['login'],
    setScreen: () => {},
+   setPrevScreens: () => {},
 }
 
 export const NavigationContext = createContext<NavigationContextType>(initialState);
 
 export default function Navigation() {
    const [screen, setScreen] = useState<Screens>('login');
-   const value = { screen, setScreen };
+   const [prevScreens, setPrevScreens] = useState<Screens[]>(['login']);
+   
+   const value = { screen, setScreen, prevScreens, setPrevScreens };
+   
    let ScreenView = <Login />
 
    switch (screen) {
@@ -50,6 +59,12 @@ export default function Navigation() {
       case 'add':
          ScreenView = <Add />;
          break;
+      case 'goals':
+         ScreenView = <Goals />;
+         break;
+      case 'statistics':
+         ScreenView = <Statistics />;
+         break;
       default:
          ScreenView = <Text>No such screen found</Text>
    }
@@ -57,9 +72,11 @@ export default function Navigation() {
    return (
       <NavigationContext.Provider value={value}>
          <TransactionProvider>
-            <View style={{ flex: 1, backgroundColor: '#0B1725' }}>
-               { ScreenView }
-            </View>
+            <GoalsProvider>
+               <View style={{ flex: 1, backgroundColor: '#0B1725' }}>
+                  { ScreenView }
+               </View>
+            </GoalsProvider>
          </TransactionProvider>
       </NavigationContext.Provider>
    )

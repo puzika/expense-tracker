@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { View, ScrollView, Text, StyleSheet } from "react-native";
+import { View, ScrollView, Text, StyleSheet, Image } from "react-native";
 import { TransactionContext } from "../contexts/transactions.context";
 import NavigationBar from "../components/navigation.component";
 
@@ -60,6 +60,11 @@ const styles = StyleSheet.create({
    category: {
       color: 'white',
       fontSize: 20,
+   },
+
+   img: {
+      width: 30,
+      objectFit: 'contain', 
    }
 })
 
@@ -82,7 +87,7 @@ export default function Home() {
                         key={Math.random().toString(36).slice(2)}
                         style={{...styles.transaction, borderColor: type === 'income' ? '#10CFAE' : '#FF7B7B' }}
                      >
-                        <Text style={{ fontSize: 30, color: type === 'income' ? '#10CFAE' : '#FF7B7B'}}>{type === 'income' ? '+': '-'}</Text>
+                        <Image style={styles.img} source={type === 'income' ? require('../assets/growth.png') : require('../assets/decline.png')} />
                         <Text style={styles.transactionValue}>${value}</Text>
                         <Text style={styles.category}>{category}</Text>
                      </View>
