@@ -1,4 +1,4 @@
-import { useState, Dispatch, SetStateAction, createContext, ReactNode } from "react";
+import { useState, Dispatch, SetStateAction, createContext } from "react";
 import { View, Text } from "react-native";
 import TransactionProvider from "./transactions.context";
 import GoalsProvider from "./goals.context";
@@ -9,6 +9,7 @@ import Transactions from "../screens/transactions.component";
 import Add from "../screens/add.screen";
 import Goals from "../screens/goals.screen";
 import Statistics from "../screens/statistics.screen";
+import HomeView from "../mvvm/homeView";
 
 export type Screens = 
    | 'login'
@@ -51,7 +52,7 @@ export default function Navigation() {
          ScreenView = <Register />;
          break;
       case 'home':
-         ScreenView = <Home />;
+         ScreenView = <HomeView />;
          break;
       case 'transactions':
          ScreenView = <Transactions />;

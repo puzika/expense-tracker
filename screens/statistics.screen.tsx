@@ -113,7 +113,7 @@ export default function Statistics() {
                <View style={styles.legend}>
                   {
                      categoriesArr.map(([category, _, color]) => (
-                        <View style={styles.legendItem}>
+                        <View key={Math.random().toString(36).slice(2)} style={styles.legendItem}>
                            <View style={[styles.square, { backgroundColor: color }]}></View>
                            <Text style={styles.text}>{category}</Text>
                         </View>
