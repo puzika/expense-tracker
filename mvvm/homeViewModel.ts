@@ -7,9 +7,9 @@ export function useGetTransactions() {
 
    const getTransactions = async () => {
       const transactionModel = new TransactionModel();
-      
-      const response = await transactionModel.get();
-      const data = await response.json() as Transaction[];
+      const data = await transactionModel.get();
+      // const response = await transactionModel.get();
+      // const data = await response.json() as Transaction[];
 
       setTransactions(data);
    }

@@ -2,6 +2,7 @@ import { View, Text, ScrollView, Image, StyleSheet } from "react-native"
 import { useGetTransactions } from "./homeViewModel";
 import { Transaction } from "./types";
 import NavigationBar from "../components/navigation.component";
+import Loading from "../components/loading.component";
 
 const styles = StyleSheet.create({
    screen: {
@@ -82,16 +83,20 @@ export default function HomeView() {
             <Text style={styles.balanceSubscript}>Balance</Text>
             <View style={styles.transactions}>
                {
-                  transactions.map(({ value, type, category}) => (
-                     <View 
-                        key={Math.random().toString(36).slice(2)}
-                        style={{...styles.transaction, borderColor: type === 'income' ? '#10CFAE' : '#FF7B7B' }}
-                     >
-                        <Image style={styles.img} source={type === 'income' ? require('../assets/growth.png') : require('../assets/decline.png')} />
-                        <Text style={styles.transactionValue}>${value}</Text>
-                        <Text style={styles.category}>{category}</Text>
-                     </View>
-                  ))
+                  transactions.length > 0 ? (
+                     transactions.map(({ value, type, category}) => (
+                        <View 
+                           key={Math.random().toString(36).slice(2)}
+                           style={{...styles.transaction, borderColor: type === 'income' ? '#10CFAE' : '#FF7B7B' }}
+                        >
+                           <Image style={styles.img} source={type === 'income' ? require('../assets/growth.png') : require('../assets/decline.png')} />
+                           <Text style={styles.transactionValue}>${value}</Text>
+                           <Text style={styles.category}>{category}</Text>
+                        </View>
+                     ))
+                  ) : (
+                     <Loading />
+                  )
                }
             </View>
          </ScrollView>
